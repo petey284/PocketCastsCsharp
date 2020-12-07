@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="token.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ChoETL" Version="1.2.1.4" />
     <PackageReference Include="ChoETL.JSON" Version="1.2.1.4" />
     <PackageReference Include="Flurl.Http" Version="3.0.0" />
