@@ -28,7 +28,6 @@ namespace Main
             // Create the HttpContent for the form to be posted.
             var requestContent = new FormUrlEncodedContent(new[] {
 
-                // nocheckin: using DI and module to enter credentials, add email and password
                 new KeyValuePair<string, string>("email", email),
                 new KeyValuePair<string, string>("password", password)
             });
@@ -80,7 +79,7 @@ namespace Main
 
             // TODO:
             // - Add Polly. Between 407 proxy errors and errors with bad json data, 
-            //   it's clear that I need a mechanism for retrying the call to the api.
+            //   it's clear that I need a mechanism for retrying calls to the api.
 
             // Still getting 407 proxy errors for some reason..
             // await FlurlBasicExample.Try();

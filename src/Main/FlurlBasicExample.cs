@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Flurl.Http;
 using Flurl.Http.Configuration;
+using PocketCastsLogin;
 
 namespace Main
 {
@@ -28,10 +29,19 @@ namespace Main
         }
     }
 
-    public static class FlurlBasicExample
+    public class FlurlBasicExample
     {
-        public static async Task Try()
+        private readonly ILoginWindow loginWindow;
+        public FlurlBasicExample(ILoginWindow loginWindow)
         {
+            this.loginWindow = loginWindow;
+        }
+
+        public async Task Try()
+        {
+
+            var (email, password) = this.loginWindow.Show();
+
             FlurlHttp.Configure(settings =>
             {
                 settings.HttpClientFactory = new ProxyHttpClientFactory();
@@ -44,7 +54,7 @@ namespace Main
                     .WithHeaders(new { origin = "https://play.pocketcasts.com" })
 
                     // Add way to enter password here:
-                    .PostJsonAsync(new { email = "nothing", password = "nothing", scope = "webplayer" })
+                    .PostJsonAsync(new { email = email, password = password, scope = "webplayer" })
                     .ReceiveJson<string>();
 
             }
